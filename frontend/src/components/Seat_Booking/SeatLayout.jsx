@@ -1,6 +1,7 @@
-import React from "react";
+// SeatLayout.jsx
+import React, { useState, useRef, useEffect } from 'react';
 import seat from './assets/seat-1.png'
-import pollengrass from './assets/meteoconspollengrass0-cyj.png'    
+import pollengrass from './assets/meteoconspollengrass0-cyj.png'
 import onhowerseat from './assets/armchair-3-2.png'
 import onselectseat from './assets/armchair-5-1.png'
 import onbookedseat from './assets/armchair-6-1.png'
@@ -9,7 +10,7 @@ import grass from "./assets/group-159.png"
 
 
 import vectorqzu from "./assets/vector-qzu.png"
-import  vectord9o   from "./assets/vector-d9o.png"
+import vectord9o from "./assets/vector-d9o.png"
 import vector97K from "./assets/vector-97K.png"
 import vectorSjP from "./assets/vector-SjP.png"
 import vectorUqB from "./assets/vector-UqB.png"
@@ -17,7 +18,7 @@ import vector from "./assets/vector.png"
 import vectorLiy from "./assets/vector-Liy.png"
 import vectorzAy from "./assets/vector-zAy.png"
 import vector1bT from "./assets/vector-1bT.png"
-import vector1Ks from "./assets/vector-1Ks.png" 
+import vector1Ks from "./assets/vector-1Ks.png"
 import vector2Ld from "./assets/vector-2Ld.png"
 import vectord73 from "./assets/vector-d73.png"
 import vectortFw from "./assets/vector-tFw.png"
@@ -31,24 +32,61 @@ import './styles/frame-1.css'
 
 
 function SeatLayout() {
-    return (
-        <>
-        {/* <img src='./pics/aachair.jpg' alt="Arm Chair Image"></img> */}
-        <meta charSet="utf-8" />
-        <link rel="icon" href="/favicon.ico" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
-        <title>Frame 1</title>
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Inter%3A400%2C800"
-        />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400%2C800"
-        />
-        <link rel="stylesheet" href="./styles/frame-1.css" />
-        <div className="frame-1-8iR">
+  const [scale, setScale] = useState(1); // Initial scale factor
+  const [minScale, setMinScale] = useState(1); // Minimum scale factor
+  const layoutRef = useRef(null); // Reference to the layout content div
+
+ // Calculate the minimum scale factor based on the dimensions of the layout content and the container
+  useEffect(() => {
+    const layoutWidth = layoutRef.current.offsetWidth;
+    const layoutHeight = layoutRef.current.offsetHeight;
+    const containerWidth = layoutRef.current.parentElement.offsetWidth;
+    const containerHeight = layoutRef.current.parentElement.offsetHeight;
+
+    // Calculate both horizontal and vertical scale factors
+    const minScaleWidth = containerWidth / layoutWidth;
+    const minScaleHeight = containerHeight / layoutHeight;
+
+    // Choose the smaller scale factor to ensure both dimensions fit within the container
+    const calculatedMinScale = Math.min(minScaleWidth, minScaleHeight);
+    setMinScale(calculatedMinScale);
+    setScale(calculatedMinScale); // Initialize scale with minimum scale
+  }, []);
+
+
+  const handleZoomIn = () => {
+    setScale(scale + 0.1); // Increase scale factor
+  };
+
+  const handleZoomOut = () => {
+      setScale(scale - 0.1); // Decrease scale factor
+    // if (scale > minScale) {
+    //   setScale(scale - 0.1); // Decrease scale factor
+    // }
+  };
+
+  return (
+    <>
+      {/* <img src='./pics/aachair.jpg' alt="Arm Chair Image"></img> */}
+      <meta charSet="utf-8" />
+      <link rel="icon" href="/favicon.ico" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="theme-color" content="#000000" />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Inter%3A400%2C800"
+      />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400%2C800"
+      />
+      <link rel="stylesheet" href="./styles/frame-1.css" />
+      <div className="frame-1-8iR" >
+        <div className="zoom-control">
+          <button onClick={handleZoomIn}>+</button> {/* Zoom In */}
+          <button onClick={handleZoomOut}>-</button> {/* Zoom Out */}
+        </div>
+        <div className="layout-section" style={{ transform: `scale(${scale})` }} ref={layoutRef}>
           <div className="auto-group-9yz1-o3s">
             <div className="auto-group-6axd-iyT">
               <div className="group-166-Bc9">
@@ -56,8 +94,8 @@ function SeatLayout() {
                   <div className="table-1-CGM"></div>
                   <img
                     style={{ rotate: "180deg" }}
-                    className="seat-1-JMK" 
-                    src={seat}                 
+                    className="seat-1-JMK"
+                    src={seat}
                   />
                 </div>
                 <div className="group-2-qMF">
@@ -65,35 +103,35 @@ function SeatLayout() {
                   <img
                     style={{ rotate: "180deg" }}
                     className="seat-2-jxR"
-                    src={seat}                  />
+                    src={seat} />
                 </div>
                 <div className="group-3-eJh">
                   <div className="table-3-Cb7"></div>
                   <img
                     style={{ rotate: "180deg" }}
                     className="seat-3-XdP"
-                    src={seat}                  />
+                    src={seat} />
                 </div>
                 <div className="group-4-eT7">
                   <div className="table-4-DFK"></div>
                   <img
                     style={{ rotate: "180deg" }}
                     className="seat-4-AwF"
-                    src={seat}                  />
+                    src={seat} />
                 </div>
                 <div className="group-5-udw">
                   <div className="table-5-rZB"></div>
                   <img
                     style={{ rotate: "180deg" }}
                     className="seat-5-1gy"
-                    src={seat}                  />
+                    src={seat} />
                 </div>
                 <div className="group-6-mAM">
                   <div className="table-6-XQR"></div>
                   <img
                     style={{ rotate: "180deg" }}
                     className="seat-6-V6M"
-                    src={seat}                  />
+                    src={seat} />
                 </div>
               </div>
               <div className="auto-group-jwau-Rkh">
@@ -216,15 +254,15 @@ function SeatLayout() {
                 <div className="group-167-Ruf">
                   <div className="auto-group-bp9t-BP3">
                     <div className="group-7-7nV">
-                      <img className="seat-7-V8q" src={seat}/>
+                      <img className="seat-7-V8q" src={seat} />
                       <div className="table-7-bBs"></div>
                     </div>
                     <div className="group-8-Z8h">
-                      <img className="seat-8-7vu" src={seat}/>
+                      <img className="seat-8-7vu" src={seat} />
                       <div className="table-8-Dyw"></div>
                     </div>
                     <div className="group-9-zUu">
-                      <img className="seat-9-MqF" src={seat}/>
+                      <img className="seat-9-MqF" src={seat} />
                       <div className="table-9-Hiu"></div>
                     </div>
                     <div className="group-10-rX7">
@@ -321,11 +359,11 @@ function SeatLayout() {
                         src={pollengrass}
                       />
                       <img className="vector-RKs" src={vector2Ld} />
-                      <img className="vector-aCm" src={vector1Ks}/>
+                      <img className="vector-aCm" src={vector1Ks} />
                       <img className="vector-WcD" src={vector1bT} />
                       <img
                         className="meteoconspollengrass0-4dj"
-                        src={pollengrass}                      />
+                        src={pollengrass} />
                       <img className="vector-zGV" src={vectorzAy} />
                       <img className="vector-iTP" src={vectorLiy} />
                       <img className="vector-4n9" src={vector} />
@@ -334,7 +372,7 @@ function SeatLayout() {
                         src={pollengrass}
                       />
                       <img className="vector-Ki5" src={vectorUqB} />
-                      <img className="vector-rT7" src={vectorSjP}/>
+                      <img className="vector-rT7" src={vectorSjP} />
                       <img className="vector-ot9" src={vector97K} />
                       <img
                         className="meteoconspollengrass0-wjT"
@@ -1433,26 +1471,27 @@ function SeatLayout() {
               <p className="blocked-by-admin-for-maintenance-global-visitors-SdT">
                 blocked by admin for ( maintenance / global visitors)
               </p>
-              <img className="armchair-5-2-ZCH" src={onselectseat} />
+              {/* <img className="armchair-5-2-ZCH" src={onselectseat} /> */}
             </div>
-            <img className="armchair-5-3-6xu" src={onselectseat} />
+            {/* <img className="armchair-5-3-6xu" src={onselectseat} /> */}
           </div>
           <div className="auto-group-ab5o-4Pw">
             <img className="armchair-5-1-XoK" src={onselectseat} />
             <p className="on-select-ggD">On select</p>
             <img className="armchair-6-1-PqX" src={onbookedseat} />
             <p className="on-booked-XB3">On booked</p>
-            <img className="armchair-7-2-SYu" src={onblockedseat} />
+            {/* <img className="armchair-7-2-SYu" src={onblockedseat} />
             <img className="armchair-7-3-xn9" src={onblockedseat} />
             <img className="armchair-6-2-gTF" src={onbookedseat} />
             <img className="armchair-6-3-dNV" src={onbookedseat} />
             <img className="armchair-3-2-mjb" src={onhowerseat} />
-            <img className="armchair-3-3-v6h" src={onhowerseat} />
+            <img className="armchair-3-3-v6h" src={onhowerseat} /> */}
           </div>
         </div>
-      </>
-      
-    );
-  }
-  
-  export default SeatLayout;
+      </div>
+    </>
+
+  );
+}
+
+export default SeatLayout;
